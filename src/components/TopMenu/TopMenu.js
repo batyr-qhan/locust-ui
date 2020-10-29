@@ -3,7 +3,7 @@ import { Input, Menu, Segment } from 'semantic-ui-react'
 import FilterDropdown from '../FilterDropdown/FilterDropdown'
 import SortDropdown from '../SortDropdown/SortDropdown'
 
-const TopMenu = () => {
+const TopMenu = ({ handleInput, handleFilter }) => {
 
   const [activeItem, setActiveItem] = useState('home')
 
@@ -27,13 +27,14 @@ const TopMenu = () => {
             <SortDropdown />
           </Menu.Item>
           <Menu.Item>
-            <FilterDropdown />
+            <FilterDropdown handleFilter={handleFilter} />
           </Menu.Item>
           <Menu.Item>
             <Input
               transparent
               icon={{ name: 'search', link: true }}
               placeholder='Search code...'
+              onChange={handleInput}
             />
           </Menu.Item>
         </Menu.Menu>

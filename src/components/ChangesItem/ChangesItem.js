@@ -16,7 +16,6 @@ function ChangesItem ({ item, childrenCount, increment }) {
         childrenCount(1)
       }
     })
-
   }, [])
 
   return (
