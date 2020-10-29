@@ -11,10 +11,10 @@ const SortDropdown = () => (
     className='icon'
   >
     <Dropdown.Menu>
-      <Dropdown.Header icon='tags' content='Sort by ' />
-      <Dropdown.Item>Important</Dropdown.Item>
-      <Dropdown.Item>Announcement</Dropdown.Item>
-      <Dropdown.Item>Discussion</Dropdown.Item>
+      <Dropdown.Header icon='sort amount down' content='Sort by changes' />
+      <Dropdown.Item>Least</Dropdown.Item>
+      {/*<Dropdown.Item>Announcement</Dropdown.Item>*/}
+      {/*<Dropdown.Item>Discussion</Dropdown.Item>*/}
     </Dropdown.Menu>
   </Dropdown>
 )

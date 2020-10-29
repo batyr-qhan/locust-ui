@@ -10,6 +10,7 @@ function SummaryItem ({ item }) {
   const [percent, setPercent] = useState(0)
   const [childrenCount, setChildrenCount] = useState(0)
   const [fileName, setFileName] = useState('')
+  const [totalChanges, setTotalChanges] = useState(0)
 
   const handleCollapseClick = () => {
     setIsOpened(!isOpened)
@@ -21,7 +22,10 @@ function SummaryItem ({ item }) {
 
   const increment = () => {
     setPercent(percent => percent >= 100 ? 0 : percent + (100 / childrenCount))
-    console.log('dlfkjsldkjf')
+  }
+
+  const handleStats = (value) => {
+    setTotalChanges(totalChanges => totalChanges + value)
   }
 
   useEffect(() => {
@@ -40,7 +44,7 @@ function SummaryItem ({ item }) {
       </List.Content>
       {item.changes.length ?
         <List.Content floated='right'>
-          <Button onClick={handleCollapseClick}>{isOpened ? 'hide' : 'expand'}</Button>
+          <Icon name={!isOpened ? 'angle right' : 'angle down'}  onClick={handleCollapseClick} />
         </List.Content> : null}
 
       <List.Icon name='file' />
@@ -49,10 +53,20 @@ function SummaryItem ({ item }) {
         Changes
         <Label.Detail>{item.changes.length}</Label.Detail>
       </Label>
+      <Label>
+        Total lines changed
+        <Label.Detail>{totalChanges}</Label.Detail>
+      </Label>
       <Collapse isOpened={isOpened}>
         <List>
           {item.changes.map((item, index) => {
-            return <ChangesItem increment={increment} childrenCount={handleChildrenCount} item={item} key={index} />
+            return <ChangesItem
+              handleStats={handleStats}
+              increment={increment}
+              childrenCount={handleChildrenCount}
+              item={item}
+              key={index}
+            />
           })}
         </List>
       </Collapse>

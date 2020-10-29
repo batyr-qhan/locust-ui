@@ -25,20 +25,15 @@ function App () {
     setFileExt(val)
   }
 
+  const handleSort = () => {
+
+  }
+
   useEffect(() => {
-
     const filtered = summary.locust.filter(item => {
-      return item.file.toLowerCase().includes(inputVal.toLowerCase())
+      return item.file.toLowerCase().includes(inputVal.toLowerCase()) && item.file.indexOf(fileExt) !== -1
     })
-
     setLocustData(filtered)
-
-    if (fileExt) {
-      const filteredByExt = locustData.filter(item => {
-        return item.file.indexOf(fileExt) !== -1
-      })
-      setLocustData(filteredByExt)
-    }
   }, [inputVal, fileExt])
 
   return (

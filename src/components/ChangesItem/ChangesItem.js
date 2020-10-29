@@ -2,7 +2,7 @@ import { List, Button, Label, Icon } from 'semantic-ui-react'
 import { Collapse } from 'react-collapse/lib/Collapse'
 import React, { useState, useEffect } from 'react'
 
-function ChangesItem ({ item, childrenCount, increment }) {
+function ChangesItem ({ item, childrenCount, increment, handleStats }) {
 
   const [isOpened, setIsOpened] = useState(false)
 
@@ -11,8 +11,9 @@ function ChangesItem ({ item, childrenCount, increment }) {
   }
 
   useEffect(() => {
+    item.children.length && handleStats(item.changed_lines)
     item.children.forEach(item => {
-      if(!item.children.length) {
+      if (!item.children.length) {
         childrenCount(1)
       }
     })
@@ -25,7 +26,7 @@ function ChangesItem ({ item, childrenCount, increment }) {
       </List.Content>
       {item.children.length ?
         <List.Content floated='right'>
-          <Button onClick={handleClick}>{isOpened ? 'hide' : 'expand'}</Button>
+          <Icon name={!isOpened ? 'angle right' : 'angle down'} onClick={handleClick} />
         </List.Content> : null}
       {item.children.length ?
         null : <List.Content floated='right'>
@@ -47,7 +48,13 @@ function ChangesItem ({ item, childrenCount, increment }) {
       <Collapse isOpened={isOpened}>
         <List>
           {item.children.map((item, i) => {
-            return <ChangesItem increment={increment} childrenCount={childrenCount} item={item} key={i} />
+            return <ChangesItem
+              handleStats={handleStats}
+              increment={increment}
+              childrenCount={childrenCount}
+              item={item}
+              key={i}
+            />
           })}
         </List>
       </Collapse>
