@@ -3,7 +3,7 @@ import { Input, Menu, Segment } from 'semantic-ui-react'
 import FilterDropdown from '../FilterDropdown/FilterDropdown'
 import SortDropdown from '../SortDropdown/SortDropdown'
 
-const TopMenu = ({ handleInput, handleFilter }) => {
+const TopMenu = ({ handleInput, handleFilter, Link }) => {
 
   const [activeItem, setActiveItem] = useState('home')
 
@@ -12,16 +12,21 @@ const TopMenu = ({ handleInput, handleFilter }) => {
   return (
     <div>
       <Menu attached='top' tabular>
-        <Menu.Item
-          name='home'
-          active={activeItem === 'home'}
-          onClick={handleItemClick}
-        />
-        <Menu.Item
-          name='completed'
-          active={activeItem === 'completed'}
-          onClick={handleItemClick}
-        />
+        <Link to='/'>
+          <Menu.Item
+            name='home'
+            active={activeItem === 'home'}
+            onClick={handleItemClick}
+          />
+        </Link>
+        <Link to='/completed'>
+          <Menu.Item
+            name='completed'
+            active={activeItem === 'completed'}
+            onClick={handleItemClick}
+          />
+
+        </Link>
         <Menu.Menu position='right'>
           <Menu.Item>
             <SortDropdown />

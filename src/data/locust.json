@@ -1,7 +1,7 @@
 {
   "locust": [
     {
-      "file": "examples/coco/upload_coco2017.py",
+      "file": "examples/coco/js/upload_coco2017.py",
       "changes": [
         {
           "name": "CocoGenerator",

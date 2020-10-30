@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 
 import ChangesItem from '../ChangesItem/ChangesItem'
 
-function SummaryItem ({ item }) {
+function SummaryItem ({ item, handleRemove, index }) {
 
   const [isOpened, setIsOpened] = useState(false)
   const [percent, setPercent] = useState(0)
@@ -34,7 +34,11 @@ function SummaryItem ({ item }) {
     }
     const newName = substringTest(item.file)
     setFileName(newName)
-  })
+
+    percent === 100 && handleRemove(index)
+    // setPercent(0)
+
+  }, [percent])
 
   return (
     <List.Item className='app__item'>
@@ -44,7 +48,7 @@ function SummaryItem ({ item }) {
       </List.Content>
       {item.changes.length ?
         <List.Content floated='right'>
-          <Icon name={!isOpened ? 'angle right' : 'angle down'}  onClick={handleCollapseClick} />
+          <Icon name={!isOpened ? 'angle right' : 'angle down'} onClick={handleCollapseClick} />
         </List.Content> : null}
 
       <List.Icon name='file' />
